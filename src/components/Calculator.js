@@ -17,7 +17,8 @@ class Calculator extends Component {
         selfImprovementfactor: 1.1, 
         timeAtSceneOfAccident: 2,
         timeRentingCar: 1,
-        doubleEntry: 2
+        awesome: 2
+
       };
   };
     setHourlyRate(hourlyRate){
@@ -83,14 +84,20 @@ class Calculator extends Component {
     numberWithCommas(num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+    setAwesome(awesome){
+      this.setState({
+        awesome
+      });
+    };
 
   render() {
       let {hourlyRate,timePerAVisit, timeAtSceneOfAccident, numberOfVisits, carWorth, timeDrivingToRehab, timeWithAtty,
-        timeRentingCar, selfImprovementfactor, attyfees} = this.state;
+        timeRentingCar, selfImprovementfactor, attyfees, awesome} = this.state;
       const rate = (Number(hourlyRate) * Number(timePerAVisit) * Number(numberOfVisits));
        let oneTime = hourlyRate * (Number(timeAtSceneOfAccident)+Number(timeWithAtty)+Number(timeRentingCar))
        let total = Number(carWorth) +selfImprovementfactor * ( oneTime + rate );
        let attyFeesEstimate = total*2 * attyfees;
+       let double = total*2;
        
     return (
         <ul className="wrapper">
@@ -129,8 +136,12 @@ class Calculator extends Component {
                 value={attyfees}
                 onChange={value => this.setAttyFees(value)}
                 />
-              <Output value={this.numberWithCommas(total)} label="Estimated Value" />
-              <Output value={this.numberWithCommas(total*2)} label="Estimated Value * 2 (Double Entry) "/>
+              <NumberInput label="Awesomeness"
+              value={awesome}
+              onChange={value => this.setAwesome(value)}
+              />
+              <Output value={this.numberWithCommas(total.toFixed(2))} label="Estimated Value" />
+              <Output value={this.numberWithCommas(double.toFixed(2))} label="Estimated Value * 2 (Double Entry) "/>
               <Output className="attyfees" value={this.numberWithCommas(attyFeesEstimate.toFixed(2))} label="Attorney Fees * (Estimated Value * 2) "/>
             </form>
         </ul>
