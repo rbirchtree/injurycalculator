@@ -7,16 +7,16 @@ class Calculator extends Component {
   constructor(props){
     super(props);
       this.state = { 
-        hourlyRate: 1, //26
-        timePerAVisit: 1,//1
-        numberOfVisits: 1,//40,
-        carWorth: 5000, //9000
-        timeDrivingToRehab: 1, //.5
-        timeWithAtty: 1, //1,
+        hourlyRate: 26, 
+        timePerAVisit: 1,
+        numberOfVisits: 20,
+        carWorth: 10000,
+        timeDrivingToRehab: .5,
+        timeWithAtty: 1, 
         attyfees: .33,
-        selfImprovementfactor: 1, //1.1 could have done more value added activities
-        timeAtSceneOfAccident: 1,//2
-        timeRentingCar: 1,//1
+        selfImprovementfactor: 1.1, 
+        timeAtSceneOfAccident: 2,
+        timeRentingCar: 1,
         doubleEntry: 2
       };
   };
@@ -79,6 +79,10 @@ class Calculator extends Component {
         attyfees
       });
     };
+    
+    numberWithCommas(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
   render() {
       let {hourlyRate,timePerAVisit, timeAtSceneOfAccident, numberOfVisits, carWorth, timeDrivingToRehab, timeWithAtty,
@@ -89,10 +93,10 @@ class Calculator extends Component {
        let attyFeesEstimate = total*2 * attyfees;
        
     return (
-        <div className="container">
-            <h1>Total Vehicle & Rehab Compensation Calculator</h1>
+        <ul className="wrapper">
+            <h1>Totaled Vehicle & Rehab Compensation Calculator</h1>
             <form className="flex-outer">
-              <NumberInput label="Hourly Rate" value={this.state.hourlyRate}
+              <NumberInput label="Hourly Rate for Client" value={this.state.hourlyRate}
                 onChange={value => this.setHourlyRate(value)}
               />
               <NumberInput label="Time at Rehab per a Visit and at Home Doing Physical Therapy" value={this.state.timePerAVisit}
@@ -125,11 +129,11 @@ class Calculator extends Component {
                 value={attyfees}
                 onChange={value => this.setAttyFees(value)}
                 />
-              <Output value={total} label="Estimated Value"/>
-              <Output value={total*2} label="Estimated Value * 2(Double Entry"/>
-              <Output value={attyFeesEstimate.toFixed(2)} label="Estimated Value * 2 with Attorney Fees"/>
+              <Output value={this.numberWithCommas(total)} label="Estimated Value" />
+              <Output value={this.numberWithCommas(total*2)} label="Estimated Value * 2 (Double Entry) "/>
+              <Output className="attyfees" value={this.numberWithCommas(attyFeesEstimate.toFixed(2))} label="Attorney Fees * (Estimated Value * 2) "/>
             </form>
-        </div>
+        </ul>
     );
   }
 };

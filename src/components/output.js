@@ -2,12 +2,12 @@ import React from 'react';
 
 export default function Output(props){
     return (
-        <div>
+        <li className="form-row">
             <label htmlFor={props.id}>{props.label}</label>
             <output id={props.id} aria-live="polite">
                 ${props.value}
             </output>
-        </div>
+        </li>
     );
 }
 

@@ -8,16 +8,17 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        {/* <div>
           <li>
             <Link to="/calculator">Calculator</Link>
             <Link to="/weather">Weather</Link>
           </li>
-        </div>
+        </div> */}
         <Switch>
           <Route exact path='/' component={Calculator}/>
           <Route exact path='/weather' component={Weather}/>          
         </Switch>
+        <h3>Please email rob.w.birch@gmail.com for feedback.</h3>
       </BrowserRouter>
     );
   }
