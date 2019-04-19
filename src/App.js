@@ -15,7 +15,7 @@ class App extends Component {
           </li>
         </div>
         <Switch>
-          <Route exact path='/calculator' component={Calculator}/>
+          <Route exact path='/' component={Calculator}/>
           <Route exact path='/weather' component={Weather}/>          
         </Switch>
       </BrowserRouter>

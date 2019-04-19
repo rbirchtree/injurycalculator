@@ -87,13 +87,11 @@ class Calculator extends Component {
        let oneTime = hourlyRate * (Number(timeAtSceneOfAccident)+Number(timeWithAtty)+Number(timeRentingCar))
        let total = Number(carWorth) +selfImprovementfactor * ( oneTime + rate );
        let attyFeesEstimate = total*2 * attyfees;
-       console.log('total',total)
-       console.log('onetime',oneTime)
-      console.log('rate',rate);
+       
     return (
-        <div>
+        <div className="container">
             <h1>Total Vehicle & Rehab Compensation Calculator</h1>
-            <form>
+            <form className="flex-outer">
               <NumberInput label="Hourly Rate" value={this.state.hourlyRate}
                 onChange={value => this.setHourlyRate(value)}
               />
